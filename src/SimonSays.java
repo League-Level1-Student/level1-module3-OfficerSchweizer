@@ -28,33 +28,51 @@ public class SimonSays extends KeyAdapter {
 	HashMap<Integer, String> images = new HashMap<Integer, String>();
 	private int imageIndex;
 	private int tries = 0;
-	private boolean simonSays = false;
+	private boolean simonSays;
+	private int score = 0;
 	Date timeAtStart;
 
 	private void makeAlbum() {
-		// 2. Add the four images that match keyboard keys like this:
-		// images.put(new Integer(KeyEvent.VK_UP), "up.jpg");
+
 		images.put(new Integer(KeyEvent.VK_UP), "up.jpg");
 		images.put(new Integer(KeyEvent.VK_DOWN), "down.jpg");
 		images.put(new Integer(KeyEvent.VK_LEFT), "left.jpg");
 		images.put(new Integer(KeyEvent.VK_RIGHT), "right.jpg");
-		// 3. Use a JOptionPane to tell the user the rules: "Press the matching key when
-		// 'Simon says' otherwise press a different key"
 		JOptionPane.showMessageDialog(null,
 				"Press the matching key when 'Simon says' otherwise press a different key.");
-		// 4. Call the showImage method to show an image
 		showImage();
 	}
 
 	public void keyPressed(KeyEvent e) {
+
 		// 15. Make a points variable to track the score.
-		int score = 0;
+
 		// 16. If the keyCode matches the imageIndex and "Simon says"
-		if ( == imageIndex && simonSays == true) {
+		if (e.getKeyCode() == imageIndex && simonSays == true) {
 			score += 1;
 			speak("Correct");
+			System.out.println("correct");
+			System.out.println(score);
+		} else {
+			if (e.getKeyCode() != imageIndex && simonSays == false) {
+				score += 1;
+				speak("Correct");
+				System.out.println("correct");
+				System.out.println(score);
+			} else {
+				speak("Incorrect");
+				System.out.println("incorrect");
+				score -= 1;
+				System.out.println(score);
+				tries += 1;
+				if (tries > 3) {
+					System.out.println("Your score is " + score);
+				}
+			}
 		}
-		
+
+		showImage();
+
 		// 17. Increase the value of score
 
 		// 18. Use the speak method to tell the user they were correct
@@ -86,17 +104,20 @@ public class SimonSays extends KeyAdapter {
 		frame.setName("Simon Says");
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addKeyListener(null);
+
+		frame.addKeyListener(this);
 
 		Random rand = new Random();
-		int simonChance = rand.nextInt(1);
+		int simonChance = rand.nextInt(2);
 
 		if (simonChance == 0) {
 			speak("Simon says press this key");
 			simonSays = true;
+
 		} else {
 			speak("Press this key");
 			simonSays = false;
+
 		}
 
 	}
