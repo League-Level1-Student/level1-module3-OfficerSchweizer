@@ -55,19 +55,19 @@ public class Calculator implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == add) {
-			
+
 			label.setText(Integer.toString(Integer.parseInt(field.getText()) + (Integer.parseInt(field2.getText()))));
 		}
 		if (e.getSource() == sub) {
-			
+
 			label.setText(Integer.toString(Integer.parseInt(field.getText()) - (Integer.parseInt(field2.getText()))));
 		}
 		if (e.getSource() == mult) {
-			
+
 			label.setText(Integer.toString(Integer.parseInt(field.getText()) * (Integer.parseInt(field2.getText()))));
 		}
 		if (e.getSource() == div) {
-			
+
 			label.setText(Integer.toString(Integer.parseInt(field.getText()) / (Integer.parseInt(field2.getText()))));
 		}
 	}
