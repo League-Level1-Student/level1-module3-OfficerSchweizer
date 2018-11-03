@@ -27,6 +27,7 @@ public class GetLatestTweet implements ActionListener {
 		search.setText("Search Twitter");
 
 		search.addActionListener(this);
+		
 
 		panel.add(field);
 		panel.add(search);
